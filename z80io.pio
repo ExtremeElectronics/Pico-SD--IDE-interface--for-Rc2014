@@ -3,8 +3,8 @@
 
 .wrap_target
 
-  mov osr,null side 1    // make inputs, wait
-  out pindirs,8 side 1   // make data inputs
+  mov osr,null side 0    // make inputs, wait
+  out pindirs,8 side 0   // make data inputs
 
   wait 0 GPIO 15 side 0  // got NOTIOEN -low
 
@@ -27,12 +27,12 @@ z80read:		 //pico SENDS data
   out pins,8 side 1      // output outFIFO to data
 
   nop side 1 [5]         // output settle time
-  nop side 0 [5]         // output settle time
+  nop side 1 [5]         // output settle time
 
-  jmp done side 0	       // no wait needed after write
+  jmp done side 1	       // no wait needed after write
 
 z80write:               // pico READS data 
-  irq wait 6 side 0     // z80 write no need for wait.
+  irq wait 6 side 1     // z80 write no need for wait.
 
 done:
 

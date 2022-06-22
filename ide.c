@@ -15,6 +15,8 @@
  *
  *	You should have received a copy of the GNU General Public License
  *	along with IDE-emu.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *	Modified for SD and PiPico Derek Woodroffe 2022
  */
 
 #include <stdio.h>
@@ -24,8 +26,6 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
-
-//#include <arpa/inet.h>
 
 #include "ide.h"
 

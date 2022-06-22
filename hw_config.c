@@ -55,8 +55,8 @@ static spi_t spis[] = {  // One for each SPI.
            can only mangage 5 MHz. Those are all I've tried. */
         //.baud_rate = 1000 * 1000, //Try this if SD doesnt work.
 //        .baud_rate = 5 * 1000 * 1000
-        .baud_rate = 10000 *1000,
-//        .baud_rate = 12500 * 1000,  // The limitation here is SPI slew rate.
+//        .baud_rate = 10000 *1000, // works ok with sandisk 
+        .baud_rate = 12500 * 1000,  // The limitation here is SPI slew rate.
         //.baud_rate = 25 * 1000 * 1000, // Actual frequency: 20833333. Has
         // worked for me with SanDisk.
 

@@ -38,6 +38,11 @@
 #define TRACEGPIO 27
 int told=0;        
 
+//IDE
+FIL fili;
+FIL fild;
+
+
 //pico pio globals
 uint8_t registers[16];
 PIO pio = pio0;  
@@ -49,6 +54,8 @@ struct ide_controller *ide0;
 const char * idepath ="CPMdisk.img";
 const char * idepathi ="CPMIDE.id";
 int iscf=0;
+
+#include "serialfile.c"
 
 #define trace_interface 1
 #define trace_ide 2
@@ -158,7 +165,7 @@ void z80io_core_entry() {
 	      told=trace;
             }
 */
-//            tight_loop_contents();	
+            tight_loop_contents();	
 		
 	}
 
@@ -267,30 +274,30 @@ int main(){
 
 
 //IDE setup
-        FIL fili;
-        FIL fild;
         ide0 = ide_allocate("cf");
         if (ide0) {
           if (iscf==0){
-            FRESULT ide_fri=f_open(&fili, idepathi, FA_READ | FA_WRITE);
+              FRESULT ide_fri=f_open(&fili, idepathi, FA_READ | FA_WRITE);
               if (ide_fri != FR_OK) {
-                printf("\n\r Error IDE ident file Open Fail %s \n\r",idepathi);
-                ide = 0;
+                  printf("\n\r Error IDE ident file Open Fail %s \n\r",idepathi);
+                  ide = 0;
               }
           }
           FRESULT ide_frd=f_open(&fild, idepath, FA_READ | FA_WRITE);
           if ( ide_frd != FR_OK) {
-             //perror(idepath);
-             printf("\n\r Error IDE Data Open Fail %s \n\r",idepath);
-             ide = 0;
+               //perror(idepath);
+               printf("\n\r Error IDE Data Open Fail %s \n\r",idepath);
+               ide = 0;
           }
+
           if (ide_attach(ide0, 0, fili,fild,iscf) == 0) {
-//             ide = 1;
              ide_reset_begin(ide0);
              printf( "IDE0 Open OK\n\r");
           }else{
             ide=0;
           }  
+
+        
         }
         if(ide==0){
            printf("\n\rWe have a failure to allocate ide\n\r Stopping\n\n");
@@ -319,7 +326,7 @@ int main(){
 // really need to think of something to do here.. Such a waste... 
 // Maybe emulate an RC2014 :) 
 
-
+/*
             if (gpio_get(TRACEGPIO)==1){
               trace=0;
             }else{
@@ -330,7 +337,9 @@ int main(){
               sleep_ms(500);
 	      told=trace;
             }
+*/
 
+            serialfile();
 
 	}
 	

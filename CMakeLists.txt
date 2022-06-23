@@ -12,6 +12,9 @@ add_executable(z80disk
      ide.c
      dictionary.c
      iniparser.c
+#cpm
+     cpmfs.c
+     device_sdfs.c 
 )
 pico_generate_pio_header(z80disk  ${CMAKE_CURRENT_LIST_DIR}/z80io.pio)
 target_sources(z80disk  PRIVATE z80disk.c)

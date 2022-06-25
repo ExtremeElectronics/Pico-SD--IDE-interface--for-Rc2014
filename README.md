@@ -25,3 +25,5 @@ run a wire from the wait signal line to the wait pin on the SD module.
 
 and that is it. 
 
+Also
+Cleck out the fast file transfer programs in the SerialCPMtools.md

@@ -14,3 +14,11 @@ They allow the basic file commands CopyTo, CopyFrom, RM, CAT and LS to work over
 CPM doesn't know files have been dumped into a dirive externally, so you may have to move into a different drive and back again if you are in the drive you ae dumping files to, to see the changes. 
 
 More details can be found in the RC20XX-file-transfer-programs Git hub https://github.com/ExtremeElectronics/RC20XX-file-transfer-programs 
+
+If you wish to use the serial uart insted of the USB connection, you will need to re compile and change the CMakeLists.txt  stdio with the lines
+
+pico_enable_stdio_usb(z80disk  0)
+pico_enable_stdio_uart(z80disk  1)
+
+
+

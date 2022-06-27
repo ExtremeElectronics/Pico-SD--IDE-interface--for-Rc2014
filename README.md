@@ -2,7 +2,7 @@
 
 A quick guide to get it working
 
-###SD card
+### SD card
 most modern SD cards appear to work.Ideally Type 10 and faster
 The size needs to be >512Mb
 Format the card to FAT32 which appears to be the default for most new cards anyway. 
@@ -26,5 +26,5 @@ run a wire from the wait signal line to the wait pin on the SD module.
 
 and that is it. 
 
-###Also
+### Also
 Cleck out the fast file transfer programs in the SerialCPMtools.md

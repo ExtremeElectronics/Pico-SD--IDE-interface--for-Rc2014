@@ -179,6 +179,7 @@ int main(){
 
 
 //uart
+
     // Set up our UART with a basic baud rate.
     uart_init(UART_ID, 2400);
 
@@ -249,6 +250,9 @@ int main(){
           idepathi =iniparser_getstring(ini, "IDE:idefilei", "");
           idepath =iniparser_getstring(ini, "IDE:idefile", idepath);
 
+          // USB or UART
+//          UseUsb=iniparser_getint(ini, "CONSOLE:port", 1);
+          
           // Trace enable from inifile
           trace=iniparser_getint(ini, "DEBUG:trace",trace );
 
@@ -260,6 +264,8 @@ int main(){
 // End of INI Parser 
 
         flash_led(200);
+        
+        
 
 //IO setup
 	gpio_init(14);

@@ -32,8 +32,9 @@ target_link_libraries(z80disk  PRIVATE
 
 )
 
-pico_enable_stdio_usb(z80disk  0)
-pico_enable_stdio_uart(z80disk  1)
+pico_enable_stdio_usb(z80disk  1)
+pico_enable_stdio_uart(z80disk  0)
+
 pico_add_extra_outputs(z80disk )
 
 

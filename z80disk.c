@@ -323,9 +323,6 @@ int main(){
 //twiddle thumbs
 	while (1) {
 
-// really need to think of something to do here.. Such a waste... 
-// Maybe emulate an RC2014 :) 
-
 /*
             if (gpio_get(TRACEGPIO)==1){
               trace=0;

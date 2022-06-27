@@ -12,7 +12,7 @@ add_executable(z80disk
      ide.c
      dictionary.c
      iniparser.c
-#cpm
+#cpm tools
      cpmfs.c
      device_sdfs.c 
 )

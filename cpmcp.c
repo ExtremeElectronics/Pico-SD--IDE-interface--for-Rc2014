@@ -202,7 +202,8 @@ void Base64ToCPM( struct cpmInode *root,  const char *filename){
       char *dest=(char*)0;
       struct cpmInode ino;
       char cpmname[2+8+1+3+1]; /* 00foobarxy.zzy\0 */
-      char encbuffer[4096+4]; 
+//      char encbuffer[4*1024+4]; 
+      char encbuffer[16*1024+4];  //faster?
 
       snprintf(cpmname,sizeof(cpmname),"00%s",filename);
       if (DEBUG) printf("Create %s\n\r",cpmname);

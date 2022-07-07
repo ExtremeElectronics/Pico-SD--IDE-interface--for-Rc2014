@@ -20,5 +20,5 @@ If you wish to use the serial uart insted of the USB connection, you will need t
 pico_enable_stdio_usb(z80disk  0)
 pico_enable_stdio_uart(z80disk  1)
 
- * Zorks per second where 1Zork=96K (aparenty this is the standard measure of file transfer speed in an RC2014)
+ ** Zorks per second where 1Zork=96K (aparenty this is the standard measure of file transfer speed in an RC2014)
 

@@ -28,7 +28,7 @@ and that is it.
 
 ### Issues ###
 
-Using command.com for file transfer will require a much longer serial delay due to pauses when writing to disk. See the Fast File Transfer below, for a faster solution.
+Using download.com for file transfer will require a much longer serial delay due to pauses when writing to disk. See the Fast File Transfer below, for a faster solution.
 
 ### Fast File Transfer
 

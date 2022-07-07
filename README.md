@@ -26,5 +26,12 @@ run a wire from the wait signal line to the wait pin on the SD module.
 
 and that is it. 
 
-### Also
-Cleck out the fast file transfer programs in the SerialCPMtools.md
+### Issues ###
+
+Using command.com for file transfer will require a much longer serial delay due to pauses when writing to disk. See the Fast File Transfer below, for a faster solution.
+
+### Fast File Transfer
+
+Connect via the USB port and transfer programs directly into CPM from a Windows or Linux machine _MUCH_ faster then using command.com
+Cleck out the fast file transfer programs in  SerialCPMtools.md 
+

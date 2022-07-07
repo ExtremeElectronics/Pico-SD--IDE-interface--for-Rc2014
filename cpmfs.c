@@ -693,11 +693,24 @@ void cpmglob(int optin, int argc, char * const argv[], struct cpmInode *root, in
   free(dirent);
 }
 
+void RemoveCR(char *src,char *dst){
+    int i=0;
+    int o=0;
+    while(src[i] !=0){
+      dst[o]=src[i];
+      i++;
+      if (dst[o]!='\r')o++;
+    }
+    dst[o]=0;
+}
+
+
 /* superblock management */
 /* diskdefReadSuper   -- read super block from diskdefs file     */ 
 static int diskdefReadSuper(struct cpmSuperBlock *d, const char *format)
 {
   char line[256];
+  char iline[256];
   int ln;
   FIL fp;
   int insideDef=0,found=0;
@@ -710,11 +723,13 @@ static int diskdefReadSuper(struct cpmSuperBlock *d, const char *format)
     exit(1);
   }
   ln=1;
-  while (f_gets(line,sizeof(line),&fp)!=NULL)
+  while (f_gets(iline,sizeof(iline),&fp)!=NULL)
   {
     int argc;
     char *argv[2];
     char *s;
+
+    RemoveCR(iline,line); // remove CR's leaving only LF's
     
     /* Allow inline comments preceded by ; or # */
     s = strchr(line, '#');

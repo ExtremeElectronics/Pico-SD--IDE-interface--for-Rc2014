@@ -29,4 +29,4 @@ You can use this suite of CLI tools on both Windows and Linux. You will need a d
 
 http://www.moria.de/~michael/cpmtools/
 
-The Disk Def file can be found in the SD folder zip.
+The Disk Def file can be found in the SD card contents zip.

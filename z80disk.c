@@ -206,6 +206,8 @@ int main(){
         flash_led(200);        
 //banner
 
+        sleep_ms(2000);
+        
         printf( "\n\n\r     ________________________________");
         printf(   "\n\r    /                                |");
         printf(   "\n\r   /           RC2014                |");

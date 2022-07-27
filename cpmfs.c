@@ -1661,6 +1661,8 @@ int cpmRead(struct cpmFile *file, char *buf, int count)
   return got;
 }
 
+
+
 /* cpmWrite           -- write                                   */ 
 int cpmWrite(struct cpmFile *file, const char *buf, int count)
 {

@@ -18,7 +18,6 @@
 #include <dmalloc.h>
 #endif
 
-//#define DEBUG 0
 
 //const char cmd[]="cpmcp";
 static int text=0;
@@ -199,13 +198,15 @@ void TestToCPM( struct cpmInode *root,  const char *filename){
 void Base64ToCPM( struct cpmInode *root,  const char *filename){
 
       int chunk;
-      char *dest=(char*)0;
+      int written;
+//      char *dest=(char*)0;
       struct cpmInode ino;
       char cpmname[2+8+1+3+1]; /* 00foobarxy.zzy\0 */
 //      char encbuffer[4*1024+4]; 
-      char encbuffer[16*1024+4];  //faster?
+      char encbuffer[20*1024+4];  //faster?
 
       snprintf(cpmname,sizeof(cpmname),"00%s",filename);
+
       if (DEBUG) printf("Create %s\n\r",cpmname);
       if (cpmCreat(root,cpmname,&ino,0666)==-1) /* just cry */ /*{{{*/
       {
@@ -224,15 +225,24 @@ void Base64ToCPM( struct cpmInode *root,  const char *filename){
               if (DEBUG) printf("Chunk:%i",chunk);
               if(chunk>0){
                   printf("Data:\n");
-                  scanf("%4100s",encbuffer);
+                  scanf("%18000s",encbuffer);
                   if (DEBUG) printf("Data:%s",encbuffer);
                   size_t decode_size = strlen(encbuffer);
                   char * decoded_data = base64_decode(encbuffer, decode_size, &decode_size);
-                  if (DEBUG) printf("%s\n\r",decoded_data);       
-                  if (DEBUG) printf("Write %i %i %s\n",chunk,decode_size,dest);
-                  if (cpmWrite(&file,decoded_data,decode_size)!=(ssize_t)decode_size)
+                  decoded_data[decode_size]=0;
+                  if (DEBUG) printf( "%s %i\n\r",decoded_data,strlen(encbuffer));       
+                  
+                  written=cpmWrite(&file,decoded_data,chunk);
+                  if (DEBUG) printf("Write %i %i %i\n",chunk,decode_size,written);
+                  
+                  if (written!=chunk){
+                      printf("Chunk/write mismatch %i %i \n",chunk,decode_size);
+                      ohno=1;
+                      chunk=0;
+                  }
+                  if (written!=(ssize_t)decode_size)
                   {
-                      printf("Can not write %i %i %s: %s\n",chunk,decode_size,dest,boo);
+                      printf("Decode/Written mismatch %i %i \n",chunk,decode_size);
                       ohno=1;
                       chunk=0;
                   }
@@ -244,7 +254,7 @@ void Base64ToCPM( struct cpmInode *root,  const char *filename){
           
           if (cpmClose(&file)==EOF && !ohno) /* I just can't hold back the tears */ /*{{{*/
           {
-              printf("can not close %s: %s\n",dest,boo);
+              printf("can not close \n");
           }
       }
 

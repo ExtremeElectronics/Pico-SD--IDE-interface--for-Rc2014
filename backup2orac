@@ -1,4 +1,0 @@
-#!/bin/bash
-scp -r /home/pico/z80diskinterface/* 10.42.42.191:/data/myprogs/pico/z80diskinterface/
-
-

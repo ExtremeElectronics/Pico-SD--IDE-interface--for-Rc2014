@@ -16,6 +16,7 @@
 #define SENDEND 8
 #define RECEIVEEND 9
 #define TEST 10
+#define WHO 12
 //#define CMDRM 11
 
 //drives
@@ -28,6 +29,7 @@
 #define CMDCOPYTO 2
 #define CMDCOPYFROM 3
 #define CMDRM 4
+#define CMDWHO 5
 
 //tokens
 #define StartToken "&&&-magic-XXX"
@@ -96,6 +98,12 @@ void WaitForCMD(void){
        scmd=TEST;
        state=TEST;
     }
+    if (strcmp(linebuffer,"WHO")==0){
+       printf("\nRC2014\n\n");
+       state=WAITFORSTART;
+       scmd=CMDNONE;
+    }
+
 
 }
 

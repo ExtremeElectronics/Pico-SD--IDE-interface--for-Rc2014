@@ -37,3 +37,27 @@ Using download.com for file transfer will require a much longer serial delay due
 Connect via the USB port and transfer programs directly into CPM from a Windows or Linux machine _MUCH_ faster then using command.com
 Cleck out the fast file transfer programs in  SerialCPMtools.md 
 
+## RC2040
+The SD images are directly compatable with the RC2040 https://github.com/ExtremeElectronics/RC2040 an RC2040.ini will work in both an RC2040 and an RC2014. The RC2014.ini will only work in an RC2014 as it only has a subset of the settings needed. The RC2040 will of course require the ROM binarys too and these will be ignored by the RC2014.
+
+## Copying from an existing CF card. 
+
+#CURRENTLY BEING TESTED USE AT YOUR OWN PERIL
+
+A complete CPM system can be moved from a CF card to an SD card. In Linux, The process is as follows. 
+
+*Be very carefull as dd can trash your system if you get this wrong*
+
+Create a dump of the CF card with dd 
+/dev/cfdrive is the path to your CF card, change this to suit your own system
+/home/cfimage.img will be the file image of your CF card, change this to suit your own system
+/home/sdfile.img will be the CPM file system image to be saved to your SD card (change RC2014.ini to match), change this to suit your own system
+
+dd if=/dev/cfdrive of=/home/cfimage.img
+
+dd if=/home/cfimage.img of=/home/CPMIDE.id bs=1024 count=1
+dd if=/home/cfimage.img of=/home/sdfile.img bs=1024 skip=1
+
+
+
+

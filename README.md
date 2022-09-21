@@ -50,11 +50,11 @@ A complete CPM system can be moved from a CF card to an SD card. In Linux, The p
 
 Create a dump of the CF card with dd 
 
-/dev/cfdrive is the path to your CF card, change this to suit your own system
+/dev/cfdrive is the path to your physical plugged in CF card, change this to suit your own system
 
-/home/cfimage.img will be the file image of your CF card, change this to suit your own system
+/home/cfimage.img will be the file image of your CF card, change this to save onto your own system
 
-/home/sdfile.img will be the CPM file system image to be saved to your SD card (change RC2014.ini to match), change this to suit your own system
+/home/sdfile.img will be the CPM file system image to be saved to your SD card (change RC2014.ini to match), change this to save onto your own system
 
 dd if=/dev/cfdrive of=/home/cfimage.img
 

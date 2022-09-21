@@ -42,7 +42,7 @@ The SD images are directly compatable with the RC2040 https://github.com/Extreme
 
 ## Copying from an existing CF card. 
 
-#CURRENTLY BEING TESTED USE AT YOUR OWN PERIL
+# CURRENTLY BEING TESTED USE AT YOUR OWN PERIL
 
 A complete CPM system can be moved from a CF card to an SD card. In Linux, The process is as follows. 
 

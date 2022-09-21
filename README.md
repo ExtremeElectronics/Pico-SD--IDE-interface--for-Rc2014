@@ -46,16 +46,20 @@ The SD images are directly compatable with the RC2040 https://github.com/Extreme
 
 A complete CPM system can be moved from a CF card to an SD card. In Linux, The process is as follows. 
 
-*Be very carefull as dd can trash your system if you get this wrong*
+**Be very carefull as dd can trash your system if you get this wrong
 
 Create a dump of the CF card with dd 
+
 /dev/cfdrive is the path to your CF card, change this to suit your own system
+
 /home/cfimage.img will be the file image of your CF card, change this to suit your own system
+
 /home/sdfile.img will be the CPM file system image to be saved to your SD card (change RC2014.ini to match), change this to suit your own system
 
 dd if=/dev/cfdrive of=/home/cfimage.img
 
 dd if=/home/cfimage.img of=/home/CPMIDE.id bs=1024 count=1
+
 dd if=/home/cfimage.img of=/home/sdfile.img bs=1024 skip=1
 
 

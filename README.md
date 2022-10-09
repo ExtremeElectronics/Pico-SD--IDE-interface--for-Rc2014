@@ -62,6 +62,8 @@ dd if=/home/cfimage.img of=/home/CPMIDE.id bs=1024 count=1
 
 dd if=/home/cfimage.img of=/home/sdfile.img bs=1024 skip=1
 
-
+# SPO256AL2
+Using the same card, without the SD card (or socket) you can emulate a SPO256-al2 and give your RC2014 the ability to play music
+https://github.com/ExtremeElectronics/Pico-SP0256-AL2-Em-for-Rc2014-SD-CARD-Module
 
 

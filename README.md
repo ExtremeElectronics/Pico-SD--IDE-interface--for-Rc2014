@@ -2,6 +2,8 @@
 
 A quick guide to get it working
 
+The Hardware can be purchaced from Z80 kits (RC2014) https://z80kits.com/shop/micro-sd-card-module/
+
 ### SD card
 most modern SD cards appear to work. Ideally type 10 or faster
 The card size needs to be >512Mb

@@ -10,7 +10,11 @@ For Newer versions of ROMWBW use the ROMWBW OLDer.zip
 
 Extract all the files to the root of your SD card, this contains all the files you need.
 
-### Note
+### Notes
+Zdos sees drives A-J
+Running CPM directly you will only get A:-C:
+
+Using FFS
 The disks will appear as A: - D: regardless of the mapping of RomWBW 
 Only drives A: to D: will be accessible, currently, trying to get to drives E: - P: will crash the SD adapter, you have been warned!
 

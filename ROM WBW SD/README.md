@@ -8,7 +8,7 @@ For *Newer versions of ROMWBW use the RomWbW-RC2014-Zed-SD-2024.zip extract all 
 
 For Newer versions of ROMWBW use the ROMWBW OLDer.zip
 
-extract all the files to the root of your SD card, this contains all the files you need.
+Extract all the files to the root of your SD card, this contains all the files you need.
 
 ### Note
 The disks will appear as A: - D: regardless of the mapping of RomWBW 

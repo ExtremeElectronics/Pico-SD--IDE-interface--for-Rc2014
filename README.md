@@ -42,27 +42,17 @@ Cleck out the fast file transfer programs in  SerialCPMtools.md
 ## RC2040
 The SD images are directly compatable with the RC2040 https://github.com/ExtremeElectronics/RC2040 an RC2040.ini will work in both an RC2040 and an RC2014. The RC2014.ini will only work in an RC2014 as it only has a subset of the settings needed. The RC2040 will of course require the ROM binarys too and these will be ignored by the RC2014.
 
+## ROMWBW
+See ROMWBW SD directory for an image to work with ROMWBW
+
 ## Copying from an existing CF card. 
 
 # CURRENTLY BEING TESTED USE AT YOUR OWN PERIL
 
-A complete CPM system can be moved from a CF card to an SD card. In Linux, The process is as follows. 
+A complete CPM system can be moved from a CF card to an SD card. In Linux, 
 
-**Be very carefull as dd can trash your system if you get this wrong
-
-Create a dump of the CF card with dd 
-
-/dev/cfdrive is the path to your physical plugged in CF card, change this to suit your own system
-
-/home/cfimage.img will be the file image of your CF card, change this to save onto your own system
-
-/home/sdfile.img will be the CPM file system image to be saved to your SD card (change RC2014.ini to match), change this to save onto your own system
-
-dd if=/dev/cfdrive of=/home/cfimage.img
-
-dd if=/home/cfimage.img of=/home/CPMIDE.id bs=1024 count=1
-
-dd if=/home/cfimage.img of=/home/sdfile.img bs=1024 skip=1
+Just copy the .img file directly on to the SD card. This is only supported for RC2014 CF card images, and ROMWBW 
+You will need the .id file from the SD card downloads above for your system and you will need to edit the RC2014.ini to poit to your new image file.
 
 # SPO256AL2
 Using the same card, without the SD card (or socket) you can emulate a SPO256-al2 and give your RC2014 the ability to play music

@@ -2,7 +2,7 @@
 
 ### This is _very_ experimental at the moment
 
-Currently this is only supported with the RC2014 SD module 
+Strongly suggest flashing the latest (not released) software if you are trying this.
 
 It uses the USB for file transfer direct to the CPM file system
 

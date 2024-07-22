@@ -319,7 +319,7 @@ int main(){
 //IDE1 setup
           if(strlen(idepath1)>4){ 
               FRESULT ide_frd=f_open(&fild1, idepath1, FA_READ | FA_WRITE);
-              if (ide_attach(ide0, 1, fili,fild,iscf) == 0) {
+              if (ide_attach(ide0, 1, fili,fild1,iscf) == 0) {
                   ide_reset_begin(ide0);
                   printf( "IDE1 %s Open OK\n\r",idepath1);
               }else{

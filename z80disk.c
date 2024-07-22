@@ -41,7 +41,7 @@ int told=0;
 //IDE
 FIL fili;
 FIL fild;
-
+FIL fild1;
 
 //pico pio globals
 uint8_t registers[16];
@@ -51,7 +51,9 @@ uint sm_z80io;
 //IDE globals
 static int ide =1; //set to 1 to init IDE
 struct ide_controller *ide0;
+
 const char * idepath ="CPMdisk.img";
+const char * idepath1 ="";
 const char * idepathi ="CPMIDE.id";
 int iscf=0;
 
@@ -125,7 +127,6 @@ void z80io_core_entry() {
               io = pio_sm_get(pio, sm_z80io);
 	      addr=(io >>10) & 0x07;
 	      
-	      //data=my_ide_read(addr & 7); //call to ide disk routines
 	      data =  ide_read8(ide0, addr);
               //if (trace & trace_ide) printf( "ide read %d = %02X\n", addr, data);
 
@@ -251,6 +252,7 @@ int main(){
 
           idepathi =iniparser_getstring(ini, "IDE:idefilei", "");
           idepath =iniparser_getstring(ini, "IDE:idefile", idepath);
+          idepath1 =iniparser_getstring(ini, "IDE:idefile1", "");
 
           // USB or UART
 //          UseUsb=iniparser_getint(ini, "CONSOLE:port", 1);
@@ -300,19 +302,42 @@ int main(){
 
           if (ide_attach(ide0, 0, fili,fild,iscf) == 0) {
              ide_reset_begin(ide0);
-             printf( "IDE0 Open OK\n\r");
+             printf( "IDE0 %s Open OK\n\r",idepath);
           }else{
             ide=0;
           }  
-
+       
         
+//        }
+//        if(ide==0){
+//           printf("\n\rWe have a failure to allocate ide\n\r Stopping\n\n");
+//           printf("\n\r%s ",idepath);
+//        }else{     
+//          printf("\n\rTrace:%i",trace);
+//          printf("\n\r\n\r OK lets start the z80 stuff\n\r");
+          
+//IDE1 setup
+          if(strlen(idepath1)>4){ 
+              FRESULT ide_frd=f_open(&fild1, idepath1, FA_READ | FA_WRITE);
+              if (ide_attach(ide0, 1, fili,fild,iscf) == 0) {
+                  ide_reset_begin(ide0);
+                  printf( "IDE1 %s Open OK\n\r",idepath1);
+              }else{
+                  ide=0;
+              }  
+          }    
         }
+        
         if(ide==0){
            printf("\n\rWe have a failure to allocate ide\n\r Stopping\n\n");
            printf("\n\r%s ",idepath);
         }else{     
           printf("\n\rTrace:%i",trace);
           printf("\n\r\n\r OK lets start the z80 stuff\n\r");
+          
+          
+          
+          
 //launch core 1
 	  multicore_launch_core1(z80io_core_entry);
 	  

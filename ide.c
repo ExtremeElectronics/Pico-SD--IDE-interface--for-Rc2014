@@ -166,7 +166,7 @@ static off_t xlate_block(struct ide_taskfile *t)
   }
   cyl = (t->lba3 << 8) | t->lba2;
   /* printf( "(H %d C %d S %d)\n", t->lba4 & DEVH_HEAD, cyl, t->lba1); */
-  if (t->lba1 == 0 || t->lba1 > d->sectors || t->lba4 >= d->heads || cyl >= d->cylinders) {
+  if (t->lba1 == 0 || t->lba1 > d->sectors || t->lba4 >= d->heads  || cyl >= d->cylinders) {
     return -1;
   }
   /* Sector 1 is first */
@@ -797,6 +797,10 @@ int ide_attach(struct ide_controller *c, int drive, FIL fi,FIL fd,int iscf )
     d->lba = 1;
   else
     d->lba = 0;
+
+  printf("Geometry Heads:%i Sectors:%i Cylindars:%i LBA:%i\n\r",d->heads,d->sectors,d->cylinders,d->lba);
+
+
   return 0;
 }
 

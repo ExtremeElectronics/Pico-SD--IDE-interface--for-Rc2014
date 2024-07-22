@@ -38,5 +38,8 @@ pico_enable_stdio_uart(z80disk  0)
 pico_add_extra_outputs(z80disk )
 
 
+#auto reboot/program
+add_compile_definitions(PICO_STDIO_USB_ENABLE_RESET_VIA_BAUD_RATE=1)
+add_compile_definitions(PICO_STDIO_USB_ENABLE_RESET_VIA_VENDOR_INTERFACE=0)
 
 

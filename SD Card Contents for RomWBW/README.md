@@ -125,6 +125,10 @@ are **not** the same as the RomWBW drive letters.  They are simply mapped
 to the first 8 slices of the RomWBW disk image.  So, A: in FFS will refer
 to the first slice, B: to the second slice, etc.
 
+The FFS tools relies on the `diskdefs` file on the SD Card for the format
+of the disk image.  The diskdefs supplied here are correct for the RomWBW
+hd1k disk format.  They are not correct for the hd512 disk format.
+
 Only drives A: to H: will be accessible, currently, trying to get to drives
 I: to P: will crash the SD adapter, you have been warned!
 Strongly suggest using the latest (not released) software if you are trying this.

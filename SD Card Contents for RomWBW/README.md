@@ -88,6 +88,9 @@ ROM, you should get the hd1k_combo.img from the RomWBW Release that
 matches your ROM and copy that onto your SD Card overwriting the previous
 copy.
 
+The [RomWBW Releases](https://github.com/wwarthen/RomWBW/releases) page
+on GitHub contains releases going back for several years.
+
 Advanced RomWBW users will frequently create their own custom
 disk images.  Any valid RomWBW disk image can be used with the Pico-SD.
 The combo image is described above because it is the most commonly used

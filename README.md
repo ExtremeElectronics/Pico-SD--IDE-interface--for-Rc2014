@@ -43,7 +43,7 @@ Cleck out the fast file transfer programs in  SerialCPMtools.md
 The SD images are directly compatable with the RC2040 https://github.com/ExtremeElectronics/RC2040 an RC2040.ini will work in both an RC2040 and an RC2014. The RC2014.ini will only work in an RC2014 as it only has a subset of the settings needed. The RC2040 will of course require the ROM binarys too and these will be ignored by the RC2014.
 
 ## ROMWBW
-See ROMWBW SD directory for an image to work with ROMWBW
+See ROMWBW usage directory for an image to work with ROMWBW
 
 ## Copying from an existing CF card. 
 

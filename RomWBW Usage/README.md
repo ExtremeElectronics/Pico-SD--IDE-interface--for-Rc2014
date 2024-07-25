@@ -5,10 +5,6 @@ built-in support for an IDE interface and will automatically detect the Pico-SD.
 All of the RomWBW operating systems and custom applications will work with the
 Pico-SD.
 
-Please refer to the
-[RomWBW User Guide](https://github.com/wwarthen/RomWBW/blob/master/Doc/RomWBW%20User%20Guide.pdf)
-for complete documentation on RomWBW.
-
 In summary, all that is required to use the Pico-SD with RomWBW is to copy the
 appropriate files onto the SD Card.
 
@@ -17,6 +13,10 @@ If you have any problems, you can get support by:
 - Posting a message at the [RC2014 Google Group](https://groups.google.com/g/rc2014-z80)
 - Submitting an issue at the [RomWBW GitHub Repository](https://github.com/wwarthen/RomWBW)
 - Contacting Wayne Warthen at wwarthen@gmail.com
+
+Please refer to the
+[RomWBW User Guide](https://github.com/wwarthen/RomWBW/blob/master/Doc/RomWBW%20User%20Guide.pdf)
+for complete documentation on RomWBW.
 
 ## Prerequisites
 
@@ -88,6 +88,9 @@ ROM, you should get the hd1k_combo.img from the RomWBW Release that
 matches your ROM and copy that onto your SD Card overwriting the previous
 copy.
 
+The [RomWBW Releases](https://github.com/wwarthen/RomWBW/releases) page
+on GitHub contains releases going back for several years.
+
 Advanced RomWBW users will frequently create their own custom
 disk images.  Any valid RomWBW disk image can be used with the Pico-SD.
 The combo image is described above because it is the most commonly used
@@ -124,6 +127,10 @@ The FFS tool will refer to the drives on the SD Card as A: to H:.  These
 are **not** the same as the RomWBW drive letters.  They are simply mapped
 to the first 8 slices of the RomWBW disk image.  So, A: in FFS will refer
 to the first slice, B: to the second slice, etc.
+
+The FFS tools relies on the `diskdefs` file on the SD Card for the format
+of the disk image.  The diskdefs supplied here are correct for the RomWBW
+hd1k disk format.  They are not correct for the hd512 disk format.
 
 Only drives A: to H: will be accessible, currently, trying to get to drives
 I: to P: will crash the SD adapter, you have been warned!

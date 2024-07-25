@@ -5,10 +5,6 @@ built-in support for an IDE interface and will automatically detect the Pico-SD.
 All of the RomWBW operating systems and custom applications will work with the
 Pico-SD.
 
-Please refer to the
-[RomWBW User Guide](https://github.com/wwarthen/RomWBW/blob/master/Doc/RomWBW%20User%20Guide.pdf)
-for complete documentation on RomWBW.
-
 In summary, all that is required to use the Pico-SD with RomWBW is to copy the
 appropriate files onto the SD Card.
 
@@ -17,6 +13,10 @@ If you have any problems, you can get support by:
 - Posting a message at the [RC2014 Google Group](https://groups.google.com/g/rc2014-z80)
 - Submitting an issue at the [RomWBW GitHub Repository](https://github.com/wwarthen/RomWBW)
 - Contacting Wayne Warthen at wwarthen@gmail.com
+
+Please refer to the
+[RomWBW User Guide](https://github.com/wwarthen/RomWBW/blob/master/Doc/RomWBW%20User%20Guide.pdf)
+for complete documentation on RomWBW.
 
 ## Prerequisites
 

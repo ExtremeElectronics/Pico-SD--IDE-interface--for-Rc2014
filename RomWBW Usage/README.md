@@ -1,4 +1,4 @@
-# Using RomWBW
+# Using Pico-SD with RomWBW
 
 The Pico-SD is fully compatible with RomWBW.  The standard RC2014 RomWBW ROM has
 built-in support for an IDE interface and will automatically detect the Pico-SD.

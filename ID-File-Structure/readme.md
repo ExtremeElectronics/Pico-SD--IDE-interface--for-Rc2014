@@ -15,7 +15,7 @@ This follows the structure of the CPM IDENTIFY DRIVE command 0xED
 
 The structure is below, but the important items for changing the disk geometry are Default CHS (words 0x202 0x204 0x206) and Current CHS (0x26c, 0x26e, 0x270) 
 
-and less so, LBAcapacity (words 60-61) and 48-bit capacity (words 100-103).
+and less so, LBAcapacity  and 48-bit capacity.
 
 ```
 Offset 		Description 							Example

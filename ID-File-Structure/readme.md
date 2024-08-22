@@ -39,3 +39,6 @@ Offset 		Description 							Example
 In the ASCII strings each word contains two characters, the high order byte the first, the low order byte the second. 
 
 The 32-bit values are given with low order word first. 
+
+A python program to read the current settings is included in this directory.
+

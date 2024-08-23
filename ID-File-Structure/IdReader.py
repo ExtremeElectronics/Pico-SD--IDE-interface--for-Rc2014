@@ -2,12 +2,17 @@
 ios = 512 #skip a whole sector, start at
 
 # change to point to the ID file to read
-IdFile = "'f:\\CPMIDE.id'"
+IdFile = "C:\\temp\\ROMWBW\\CPMIDE.id"
+IdFile = "F:\\CPMIDE.id"
 
 def PrintIntegerIdent(s, b):
-    v = ident[b+ios]+256*ident[b+1+ios]
+    v = ident[b+ios] + 256*ident[b+1+ios]
     print(hex(b+ios)," ", end='')
-    print(s+":", v)
+    print(s+":", hex(v),v)
+def PrintLongIdent(s, b):
+    v = ident[b+ios] + 256*ident[b+1+ios] + 65536*ident[b+2+ios] + 16777216*ident[b+3+ios]
+    print(hex(b+ios)," ", end='')
+    print(s+":", hex(v),v)
 
 
 def PrintMagic():
@@ -50,6 +55,7 @@ PrintCharIdent("ModelNumber", 54, 40)
 PrintIntegerIdent("Current No Cylindars", 108)
 PrintIntegerIdent("Current No heads", 110)
 PrintIntegerIdent("Current Sectors per Track", 112)
-PrintIntegerIdent("Current capacity in Sectors", 114)
 
-PrintIntegerIdent("Current accessable Sectors", 120)
+PrintLongIdent("Current capacity in Sectors", 114)
+PrintLongIdent("Current accessable Sectors", 120)
+

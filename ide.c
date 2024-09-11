@@ -16,7 +16,8 @@
  *	You should have received a copy of the GNU General Public License
  *	along with IDE-emu.  If not, see <http://www.gnu.org/licenses/>.
  *
- *	Modified for SD and PiPico Derek Woodroffe 2022
+ * 
+ *      Modified for SD and PiPico Derek Woodroffe 2022
  */
 
 #include <stdio.h>
@@ -26,6 +27,8 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
+
+//#include <arpa/inet.h>
 
 #include "ide.h"
 
@@ -125,6 +128,14 @@ static uint16_t le16(uint16_t v)
   return p[0] | (p[1] << 8);
 }
 
+
+static uint32_t le32(uint32_t v)
+{
+  uint8_t *p = (uint8_t *)&v;
+  return p[0] | (p[1] << 8) |(p[2] << 16)   | (p[3] << 24);
+}
+
+
 static void ide_xlate_errno(struct ide_taskfile *t, int len)
 {
   t->status |= ST_ERR;
@@ -166,7 +177,7 @@ static off_t xlate_block(struct ide_taskfile *t)
   }
   cyl = (t->lba3 << 8) | t->lba2;
   /* printf( "(H %d C %d S %d)\n", t->lba4 & DEVH_HEAD, cyl, t->lba1); */
-  if (t->lba1 == 0 || t->lba1 > d->sectors || t->lba4 >= d->heads  || cyl >= d->cylinders) {
+  if (t->lba1 == 0 || t->lba1 > d->sectors || t->lba4 >= d->heads || cyl >= d->cylinders) {
     return -1;
   }
   /* Sector 1 is first */
@@ -797,10 +808,20 @@ int ide_attach(struct ide_controller *c, int drive, FIL fi,FIL fd,int iscf )
     d->lba = 1;
   else
     d->lba = 0;
+    
+    
+//overwite the ident file to give correct sizes for disk image files.  
+  uint32_t imgsize=f_size(&d->fd);    
+//  printf("Attach %i size 0x%8X %i bytes \n",drive,imgsize,imgsize);
+  imgsize=imgsize/512;
+  d->identify[58]=le16(imgsize >> 16);
+  d->identify[57]=le16(imgsize & 0xffff);
+  
+  d->identify[61]=le16(imgsize >> 16);
+  d->identify[60]=le16(imgsize & 0xffff);
 
-  printf("Geometry Heads:%i Sectors:%i Cylindars:%i LBA:%i\n\r",d->heads,d->sectors,d->cylinders,d->lba);
-
-
+//  printf(" %4x %4x\n",d->identify[57],d->identify[58]);
+    
   return 0;
 }
 

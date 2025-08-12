@@ -445,7 +445,7 @@ static const char *cmd2str(const cmdSupported cmd) {
 }
 #endif
 
-#define SD_COMMAND_TIMEOUT 2000 /*!< Timeout in ms for response */
+#define SD_COMMAND_TIMEOUT 5000 /*!< Timeout in ms for response - increased for problematic cards */
 
 static int sd_cmd(sd_card_t *pSD, const cmdSupported cmd, uint32_t arg,
                   bool isAcmd, uint32_t *resp) {
@@ -725,18 +725,31 @@ uint64_t sd_sectors(sd_card_t *pSD) {
     return sectors;
 }
 
-// SPI function to wait till chip is ready and sends start token
+// Enhanced SPI function to wait till chip is ready and sends start token
 static bool sd_wait_token(sd_card_t *pSD, uint8_t token) {
     TRACE_PRINTF("%s(0x%02hhx)\r\n", __FUNCTION__, token);
 
-    const uint32_t timeout = SD_COMMAND_TIMEOUT;  // Wait for start token
+    const uint32_t timeout = SD_COMMAND_TIMEOUT * 2;  // Double timeout for data tokens
     absolute_time_t timeout_time = make_timeout_time_ms(timeout);
+    uint32_t attempts = 0;
+    
     do {
-        if (token == sd_spi_write(pSD, SPI_FILL_CHAR)) {
+        uint8_t response = sd_spi_write(pSD, SPI_FILL_CHAR);
+        attempts++;
+        
+        if (token == response) {
+            TRACE_PRINTF("sd_wait_token: success after %lu attempts\r\n", attempts);
             return true;
         }
+        
+        // Add small delay every 100 attempts to help with timing
+        if (attempts % 100 == 0) {
+            sleep_us(10);
+        }
+        
     } while (0 < absolute_time_diff_us(get_absolute_time(), timeout_time));
-    DBG_PRINTF("sd_wait_token: timeout\r\n");
+    
+    DBG_PRINTF("sd_wait_token: timeout after %lu attempts (expected 0x%02X)\r\n", attempts, token);
     return false;
 }
 

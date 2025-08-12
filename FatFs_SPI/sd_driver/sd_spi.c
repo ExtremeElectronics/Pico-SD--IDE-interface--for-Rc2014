@@ -28,11 +28,22 @@ specific language governing permissions and limitations under the License.
 #define TRACE_PRINTF printf  // task_printf
 
 void sd_spi_go_high_frequency(sd_card_t *pSD) {
-    uint actual = spi_set_baudrate(pSD->spi->hw_inst, pSD->spi->baud_rate);
-    TRACE_PRINTF("%s: Actual frequency: %lu\n", __FUNCTION__, (long)actual);
+    // Use more conservative high frequency for better compatibility
+    uint target_freq = pSD->spi->baud_rate;
+    if (target_freq > 8000000) {
+        target_freq = 8000000; // Cap at 8MHz instead of 12MHz
+    }
+    uint actual = spi_set_baudrate(pSD->spi->hw_inst, target_freq);
+    TRACE_PRINTF("%s: Actual frequency: %lu (target was %lu)\n", __FUNCTION__, (long)actual, (long)target_freq);
 }
 void sd_spi_go_low_frequency(sd_card_t *pSD) {
-    uint actual = spi_set_baudrate(pSD->spi->hw_inst, 400 * 1000); // Actual frequency: 398089
+    // Use even slower initialization frequency for problematic cards
+    uint actual = spi_set_baudrate(pSD->spi->hw_inst, 100 * 1000); // 100kHz instead of 400kHz
+    TRACE_PRINTF("%s: Actual frequency: %lu\n", __FUNCTION__, (long)actual);
+}
+void sd_spi_go_medium_frequency(sd_card_t *pSD) {
+    // Medium frequency for initial data operations - helps problematic cards
+    uint actual = spi_set_baudrate(pSD->spi->hw_inst, 2000000); // 2MHz intermediate step
     TRACE_PRINTF("%s: Actual frequency: %lu\n", __FUNCTION__, (long)actual);
 }
 
@@ -96,14 +107,25 @@ uint8_t sd_spi_write(sd_card_t *pSD, const uint8_t value) {
 
 void sd_spi_send_initializing_sequence(sd_card_t * pSD) {
     bool old_ss = gpio_get(pSD->ss_gpio);
-    // Set DI and CS high and apply 74 or more clock pulses to SCLK:
+    // Enhanced initialization sequence for problematic cards
     gpio_put(pSD->ss_gpio, 1);
-    uint8_t ones[10];
+    
+    // Send many more clock cycles (200+ instead of 80)
+    uint8_t ones[25]; // 25 * 8 = 200 clock cycles
     memset(ones, 0xFF, sizeof ones);
-    absolute_time_t timeout_time = make_timeout_time_ms(1);
-    do {
-        sd_spi_transfer(pSD, ones, NULL, sizeof ones);
-    } while (0 < absolute_time_diff_us(get_absolute_time(), timeout_time));
+    
+    // Send initializing sequence multiple times with delays
+    for (int attempt = 0; attempt < 3; attempt++) {
+        absolute_time_t timeout_time = make_timeout_time_ms(5); // Longer timeout
+        do {
+            sd_spi_transfer(pSD, ones, NULL, sizeof ones);
+        } while (0 < absolute_time_diff_us(get_absolute_time(), timeout_time));
+        
+        if (attempt < 2) {
+            sleep_ms(10); // Delay between attempts
+        }
+    }
+    
     gpio_put(pSD->ss_gpio, old_ss);
 }
 
